@@ -1,6 +1,0 @@
-<testsuites name="results">
-  <testsuite name="all" package="all">
-    <property name="random_seed" value="1769095734" />
-    <testcase name="main_test" classname="tb_first" file="/uio/hume/student-u09/majajma/M-drive/pc/Dokumenter/oblig1/tb/tb_first.py" lineno="8" time="0.0006172657012939453" sim_time_ns="390.0" ratio_time="631818.6790266512" />
-  </testsuite>
-</testsuites>
