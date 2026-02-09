@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1769606426" />
+    <testcase name="test_all_switch_combinations_select" classname="tb_decoder_select" file="/uio/hume/student-u09/majajma/M-drive/pc/Dokumenter/oblig2/test/tb_decoder_select.py" lineno="4" time="0.0003788471221923828" sim_time_ns="50.0" ratio_time="131979.35808684706" />
+  </testsuite>
+</testsuites>
