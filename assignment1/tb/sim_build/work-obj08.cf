@@ -1,4 +1,0 @@
-v 4
-file "/uio/hume/student-u09/majajma/M-drive/pc/Dokumenter/oblig1/tb/" "../src/first.vhd" "353602fba88be5d27fa20b3e637d09b0b493c779" "20260122152854.343":
-  entity first at 1( 0) + 0 on 11;
-  architecture rtl of first at 17( 400) + 0 on 12;
