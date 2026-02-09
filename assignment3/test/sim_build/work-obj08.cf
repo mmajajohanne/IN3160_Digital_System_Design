@@ -1,7 +1,0 @@
-v 4
-file / "/uio/hume/student-u09/majajma/M-drive/pc/Dokumenter/oblig3/test/../src/delay.vhd" "779daf5113a1a67c04e6071dfd958100d010ec3c" "20260204231639.690":
-  entity delay at 3( 19) + 0 on 15;
-  architecture rtl of delay at 16( 315) + 0 on 16;
-file / "/uio/hume/student-u09/majajma/M-drive/pc/Dokumenter/oblig3/test/../src/variables_vs_signals.vhd" "11502131eafd956bce70103c9ee98bb4c7764c68" "20260204215747.380":
-  entity variables_vs_signals at 1( 0) + 0 on 13;
-  architecture dataflow of variables_vs_signals at 11( 199) + 0 on 14;
