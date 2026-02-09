@@ -1,5 +1,0 @@
-v 4
-file / "/uio/hume/student-u09/majajma/M-drive/pc/Dokumenter/oblig2/test/../src/decoder_ent.vhd" "ae1f74d346a2d90866cf61271a19d440507c80ef" "20260128132025.756":
-  entity decoder at 1( 0) + 0 on 11;
-file / "/uio/hume/student-u09/majajma/M-drive/pc/Dokumenter/oblig2/test/../src/decoder_select.vhd" "37bde135a30a54716fc33e2b2d2d04b3f2d1caf2" "20260128132025.756":
-  architecture select_arch of decoder at 1( 0) + 0 on 12;
