@@ -1,0 +1,18 @@
+SIM = ghdl
+TOPLEVEL_LANG = vhdl
+TOPLEVEL = system_c_top
+MODULE = tb_system_c
+
+VHDL_SOURCES = \
+    $(PWD)/../src/pdm.vhd \
+    $(PWD)/../src/pulse_width_modulator.vhd \
+    $(PWD)/../src/self_test.vhd \
+    $(PWD)/../src/output_synchronizer.vhd \
+    $(PWD)/../src/system_c_top.vhd
+
+SIM_ARGS = --wave=system_c.ghw
+
+EXTRA_ARGS = --std=08
+SIM_ARGS += -gTICK_LIMIT=99
+
+include $(shell cocotb-config --makefiles)/Makefile.sim

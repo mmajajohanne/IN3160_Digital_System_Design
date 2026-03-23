@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1774215117" />
+    <testcase name="test_self_test_rom" classname="tb_self_test" file="/uio/hume/student-u09/majajma/M-drive/pc/Dokumenter/assignment8/test/tb_self_test.py" lineno="22" time="0.04365134239196777" sim_time_ns="25750.0" ratio_time="589901.6751598966" />
+  </testsuite>
+</testsuites>

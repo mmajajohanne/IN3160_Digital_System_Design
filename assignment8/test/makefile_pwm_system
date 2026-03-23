@@ -1,0 +1,24 @@
+SIM = ghdl
+TOPLEVEL_LANG = vhdl
+TOPLEVEL = pwm_system
+MODULE = tb_pwm_system
+
+VHDL_SOURCES = \
+    $(PWD)/../src/seg7_pkg.vhd \
+    $(PWD)/../src/seg7ctrl_ent.vhd \
+    $(PWD)/../src/seg7ctrl.vhd \
+    $(PWD)/../src/pdm.vhd \
+    $(PWD)/../src/pulse_width_modulator.vhd \
+    $(PWD)/../src/self_test.vhd \
+    $(PWD)/../src/input_synchronizer.vhd \
+    $(PWD)/../src/output_synchronizer.vhd \
+    $(PWD)/../src/quadrature_decoder.vhd \
+    $(PWD)/../src/velocity_reader.vhd \
+    $(PWD)/../src/pwm_system.vhd
+
+SIM_ARGS = --wave=pwm_system.ghw
+SIM_ARGS += -gTICK_LIMIT=999
+
+EXTRA_ARGS = --std=08
+
+include $(shell cocotb-config --makefiles)/Makefile.sim

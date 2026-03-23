@@ -1,0 +1,4 @@
+v 4
+file / "/uio/hume/student-u09/majajma/M-drive/pc/Dokumenter/assignment8/test/../src/self_test.vhd" "dd994ed0b327780fb2610e8648caa05bae3e098f" "20260322213156.775":
+  entity self_test at 1( 0) + 0 on 11;
+  architecture rtl of self_test at 18( 412) + 0 on 12;

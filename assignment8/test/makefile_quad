@@ -1,0 +1,13 @@
+SIM = ghdl
+TOPLEVEL_LANG = vhdl
+TOPLEVEL = quadrature_decoder
+MODULE = tb_quadrature_decoder
+
+VHDL_SOURCES = \
+    $(PWD)/../src/quadrature_decoder.vhd
+
+SIM_ARGS = --wave=quad.ghw
+
+EXTRA_ARGS = --std=08
+
+include $(shell cocotb-config --makefiles)/Makefile.sim
