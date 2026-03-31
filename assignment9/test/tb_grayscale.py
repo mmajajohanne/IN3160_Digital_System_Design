@@ -56,20 +56,26 @@ async def gray_check(dut):
     while True:
         await RisingEdge(dut.clk)
         await ReadOnly()
+        # beregner forventet verdi fra nåværende inputs
         CheckR = dut.WR.value.to_unsigned() * dut.R.value.to_unsigned()
         CheckG = dut.WG.value.to_unsigned() * dut.G.value.to_unsigned()
         CheckB = dut.WB.value.to_unsigned() * dut.B.value.to_unsigned()
-        if dut.Y_valid.value == True:
-            CheckGray = (CheckR+CheckG+CheckB)>>8
-            assert CheckGray == int(dut.Y.value), (
+        CheckGray = (CheckR+CheckG+CheckB)>>8
+        # sammenlign Y med forventet verdi fra forrige syklus
+        if dut.Y_valid.value == True and prev_CheckGray is not None:
+            assert prev_CheckGray == int(dut.Y.value), (
                 f"Model value: {CheckGray} != simulated value: {int(dut.Y.value)} ")
+        
+        prev_CheckGray = CheckGray # lagre for neste iterasjon
 
+        
 async def valid_check(dut):
-    while True:
+    while True: 
         await FallingEdge(dut.clk)
         await ReadOnly()
         data_valid = dut.RGB_valid.value
         await RisingEdge(dut.clk)
+        await RisingEdge(dut.clk) # venter en klokke til for å tilpasses 2 steg pipeline
         await ReadOnly()
         assert data_valid == dut.Y_valid.value, "Y_valid does not follow RGB_ready"
         
