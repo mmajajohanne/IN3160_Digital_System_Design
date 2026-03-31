@@ -53,6 +53,7 @@ async def overflow_check(dut):
         assert False, "Overflow has occured"
         
 async def gray_check(dut):
+    prev_CheckGray = None
     while True:
         await RisingEdge(dut.clk)
         await ReadOnly()
@@ -64,11 +65,11 @@ async def gray_check(dut):
         # sammenlign Y med forventet verdi fra forrige syklus
         if dut.Y_valid.value == True and prev_CheckGray is not None:
             assert prev_CheckGray == int(dut.Y.value), (
-                f"Model value: {CheckGray} != simulated value: {int(dut.Y.value)} ")
+                f"Model value: {prev_CheckGray} != simulated value: {int(dut.Y.value)} ")
         
         prev_CheckGray = CheckGray # lagre for neste iterasjon
 
-        
+
 async def valid_check(dut):
     while True: 
         await FallingEdge(dut.clk)
@@ -100,7 +101,7 @@ async def grayscale_builder(dut, gray):
 @cocotb.test()
 async def main_test(dut):
     dut._log.info("### Opening image ###")
-    img = Image.open('images/cat.jpg')
+    img = Image.open('images/soda.png')
     width = int(img.width/SCALING)
     height = int(img.height/SCALING)
     gray = Image.new('L', (width, height)) # L for Luma = grayscale has only 1 value per pixel
