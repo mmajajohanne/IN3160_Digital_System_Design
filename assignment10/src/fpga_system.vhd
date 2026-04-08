@@ -1,6 +1,5 @@
--- fpga_system.vhd
 -- toppnivå for oppgave 10: system-on-chip integrasjon.
--- duty_cycle er nå en inngang fra zynq-prosessoren via axi-gpio.
+-- duty_cycle er nå en inngang
 -- self_test er fjernet; velocity er lagt til som utgang slik at prosessoren kan lese hastigheten.
 
 library ieee;
@@ -32,7 +31,7 @@ begin
   velocity     <= std_logic_vector(velocity_i);
   abs_vel      <= unsigned(abs(velocity_i));
 
-  -- pulsbreddemodulator
+  -- pwm
   pwm : entity work.pulse_width_modulator
     port map(
       mclk       => mclk,
