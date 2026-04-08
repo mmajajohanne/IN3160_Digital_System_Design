@@ -1,22 +1,18 @@
 -- fpga_system.vhd
--- Assignment 10: Top level for SoC integration.
--- duty_cycle is now an input from the Zynq processor via AXI-GPIO.
--- self_test module removed; velocity output added for processor readback.
+-- toppnivå for oppgave 10: system-on-chip integrasjon.
+-- duty_cycle er nå en inngang fra zynq-prosessoren via axi-gpio.
+-- self_test er fjernet; velocity er lagt til som utgang slik at prosessoren kan lese hastigheten.
 
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity fpga_system is
-  generic(
-    RCOUNT_WIDTH : natural := 20;
-    TEN_MS_COUNT : natural := 1_000_000
-  );
   port(
     mclk, reset     : in  std_ulogic;
-    duty_cycle      : in  std_logic_vector(7 downto 0);  -- from AXI-GPIO (processor output)
+    duty_cycle      : in  std_logic_vector(7 downto 0);
     sa, sb          : in  std_ulogic;
-    velocity        : out std_logic_vector(7 downto 0);  -- to AXI-GPIO (processor input)
+    velocity        : out std_logic_vector(7 downto 0);
     dir_out, en_out : out std_ulogic;
     abcdefg         : out std_logic_vector(6 downto 0);
     c               : out std_logic
@@ -36,7 +32,7 @@ begin
   velocity     <= std_logic_vector(velocity_i);
   abs_vel      <= unsigned(abs(velocity_i));
 
-  -- PWM module (with PDM submodule)
+  -- pulsbreddemodulator
   pwm : entity work.pulse_width_modulator
     port map(
       mclk       => mclk,
@@ -46,7 +42,7 @@ begin
       en         => en_i
     );
 
-  -- Output synchronizer
+  -- utgangssynkronisering
   out_sync : entity work.output_synchronizer
     port map(
       mclk    => mclk,
@@ -57,7 +53,7 @@ begin
       en_out  => en_out
     );
 
-  -- Input synchronizer for encoder signals
+  -- inngangsynkronisering for encoder-signaler
   in_sync : entity work.input_synchronizer
     port map(
       mclk   => mclk,
@@ -68,7 +64,7 @@ begin
       sb_out => sb_sync_i
     );
 
-  -- Quadrature decoder
+  -- quadrature-dekoder
   quad : entity work.quadrature_decoder
     port map(
       mclk    => mclk,
@@ -79,11 +75,11 @@ begin
       pos_dec => pos_dec_i
     );
 
-  -- Velocity measurement
+  -- hastighetsberegning
   vel : entity work.velocity_reader
     generic map(
-      RCOUNT_WIDTH => RCOUNT_WIDTH,
-      TEN_MS_COUNT => TEN_MS_COUNT
+      RCOUNT_WIDTH => 20,
+      TEN_MS_COUNT => 1_000_000
     )
     port map(
       mclk     => mclk,
@@ -93,11 +89,11 @@ begin
       velocity => velocity_i
     );
 
-  -- 7-segment display (shows absolute speed)
+  -- 7-segment display (viser absolutt hastighet)
   seg7 : entity work.seg7ctrl
     port map(
-      mclk    => mclk,
-      reset   => reset,
+      mclk    => std_logic(mclk),
+      reset   => std_logic(reset),
       d0      => std_logic_vector(abs_vel(3 downto 0)),
       d1      => std_logic_vector(abs_vel(7 downto 4)),
       abcdefg => abcdefg,
